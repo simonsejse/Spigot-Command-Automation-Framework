@@ -3,5 +3,4 @@ version: ${project.version}
 main: dk.simonsejse.testplugin.Base
 api-version: 1.15
 commands:
-  test:
-  help:
+  gamemode:

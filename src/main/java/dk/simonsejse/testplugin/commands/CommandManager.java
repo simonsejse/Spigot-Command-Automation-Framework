@@ -8,17 +8,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.reflections.Reflections;
-
+import org.reflections.scanners.Scanners;
 
 import java.lang.reflect.InvocationTargetException;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
-import static org.reflections.scanners.Scanners.TypesAnnotated;
 
 public class CommandManager implements CommandExecutor {
 
@@ -51,7 +47,7 @@ public class CommandManager implements CommandExecutor {
             final ICommandImpl iCommandImpl = iCommandImplICommandPerformImplEntry.getKey();
 
             if (!this.base.cooldownManager.hasCooldownExpired(player, iCommandImpl)) throw new CommandCooldownException(String.format("Du skal vente %s sek med at bruge kommandoen igen!", this.base.cooldownManager.getCooldown(player, iCommandImpl)));
-            iCommandPerformImpl.performOnCommand(player, args);
+            iCommandPerformImpl.performPreArguments(player, args);
             this.base.cooldownManager.addCooldown(player, iCommandImpl);
         }catch(CommandNotFoundException | CommandCooldownException e){
             player.sendMessage(e.getMessage());
@@ -65,7 +61,7 @@ public class CommandManager implements CommandExecutor {
     }
 
     public void registerCommands(){
-        Reflections reflections = new Reflections("dk.simonsejse.testplugin", TypesAnnotated);
+        Reflections reflections = new Reflections("dk.simonsejse.testplugin", Scanners.TypesAnnotated);
 
         final Set<Class<?>> commands = reflections.getTypesAnnotatedWith(ICommandImpl.class);
 
