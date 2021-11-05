@@ -1,6 +1,4 @@
-package dk.simonsejse.testplugin.exceptions;
-
-import org.bukkit.command.CommandExecutor;
+package dk.simonsejse.automatecommands.exceptions;
 
 public class CommandNotFoundException extends RuntimeException {
     public CommandNotFoundException(String message){

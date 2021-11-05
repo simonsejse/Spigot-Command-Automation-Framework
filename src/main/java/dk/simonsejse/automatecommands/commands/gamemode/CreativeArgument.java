@@ -1,6 +1,6 @@
-package dk.simonsejse.testplugin.commands.gamemode;
+package dk.simonsejse.automatecommands.commands.gamemode;
 
-import dk.simonsejse.testplugin.commands.ISubCommand;
+import dk.simonsejse.automatecommands.commands.ISubCommand;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 

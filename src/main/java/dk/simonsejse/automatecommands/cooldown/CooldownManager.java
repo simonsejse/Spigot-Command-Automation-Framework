@@ -1,7 +1,7 @@
-package dk.simonsejse.testplugin.cooldown;
+package dk.simonsejse.automatecommands.cooldown;
 
-import dk.simonsejse.testplugin.Base;
-import dk.simonsejse.testplugin.commands.ICommandImpl;
+import dk.simonsejse.automatecommands.Base;
+import dk.simonsejse.automatecommands.commands.ICommandImpl;
 import org.bukkit.entity.Player;
 
 import java.time.Duration;

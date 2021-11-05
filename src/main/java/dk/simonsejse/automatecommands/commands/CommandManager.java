@@ -1,8 +1,8 @@
-package dk.simonsejse.testplugin.commands;
+package dk.simonsejse.automatecommands.commands;
 
-import dk.simonsejse.testplugin.Base;
-import dk.simonsejse.testplugin.exceptions.CommandCooldownException;
-import dk.simonsejse.testplugin.exceptions.CommandNotFoundException;
+import dk.simonsejse.automatecommands.Base;
+import dk.simonsejse.automatecommands.exceptions.CommandCooldownException;
+import dk.simonsejse.automatecommands.exceptions.CommandNotFoundException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

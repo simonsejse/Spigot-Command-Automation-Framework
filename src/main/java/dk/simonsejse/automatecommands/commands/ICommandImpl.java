@@ -1,4 +1,4 @@
-package dk.simonsejse.testplugin.commands;
+package dk.simonsejse.automatecommands.commands;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

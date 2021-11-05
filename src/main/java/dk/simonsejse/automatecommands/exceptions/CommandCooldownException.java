@@ -1,6 +1,4 @@
-package dk.simonsejse.testplugin.exceptions;
-
-import org.bukkit.command.Command;
+package dk.simonsejse.automatecommands.exceptions;
 
 public class CommandCooldownException extends RuntimeException{
     public CommandCooldownException(String error){

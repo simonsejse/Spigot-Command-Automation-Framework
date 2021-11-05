@@ -1,8 +1,7 @@
-package dk.simonsejse.testplugin.commands;
+package dk.simonsejse.automatecommands.commands;
 
-import dk.simonsejse.testplugin.exceptions.CommandNoArgumentFoundException;
-import dk.simonsejse.testplugin.exceptions.WrongCommandUsage;
-import org.bukkit.command.Command;
+import dk.simonsejse.automatecommands.exceptions.CommandNoArgumentFoundException;
+import dk.simonsejse.automatecommands.exceptions.WrongCommandUsage;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;

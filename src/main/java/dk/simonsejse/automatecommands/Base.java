@@ -1,7 +1,7 @@
-package dk.simonsejse.testplugin;
+package dk.simonsejse.automatecommands;
 
-import dk.simonsejse.testplugin.commands.CommandManager;
-import dk.simonsejse.testplugin.cooldown.CooldownManager;
+import dk.simonsejse.automatecommands.commands.CommandManager;
+import dk.simonsejse.automatecommands.cooldown.CooldownManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Base extends JavaPlugin {

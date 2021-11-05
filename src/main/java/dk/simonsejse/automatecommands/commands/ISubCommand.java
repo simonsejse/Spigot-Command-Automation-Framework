@@ -1,4 +1,4 @@
-package dk.simonsejse.testplugin.commands;
+package dk.simonsejse.automatecommands.commands;
 
 import org.bukkit.entity.Player;
 
