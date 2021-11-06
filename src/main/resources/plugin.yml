@@ -1,6 +1,6 @@
 name: DeleteTest
 version: ${project.version}
-main: dk.simonsejse.testplugin.Base
+main: dk.simonsejse.automatecommands.Base
 api-version: 1.15
 commands:
   gamemode:

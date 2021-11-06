@@ -14,7 +14,6 @@ public final class Base extends JavaPlugin {
 
         final CommandManager commandManager = new CommandManager(this);
         commandManager.registerCommands();
-
     }
 
     @Override

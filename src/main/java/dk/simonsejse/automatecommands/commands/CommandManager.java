@@ -19,20 +19,19 @@ import java.util.Set;
 public class CommandManager implements CommandExecutor {
 
     private final Base base;
-    private final Map<ICommandImpl, ICommandPerformImpl> commands;
+    private final Map<ICommandImpl, AbstractCommandPerformImpl> commands;
 
     public CommandManager(final Base base){
         this.base = base;
         this.commands = new HashMap<>();
     }
 
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String cmd, String[] args) {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
 
-        Optional<Map.Entry<ICommandImpl, ICommandPerformImpl>> iCommandImplICommandPerformImplEntryOptional = this.commands
+        Optional<Map.Entry<ICommandImpl, AbstractCommandPerformImpl>> iCommandImplICommandPerformImplEntryOptional = this.commands
                 .entrySet()
                 .stream()
                 .filter(iCommandImplICommandPerformImplEntry -> {
@@ -40,37 +39,32 @@ public class CommandManager implements CommandExecutor {
         }).findFirst();
 
         try{
-            Map.Entry<ICommandImpl, ICommandPerformImpl> iCommandImplICommandPerformImplEntry =
+            Map.Entry<ICommandImpl, AbstractCommandPerformImpl> iCommandImplICommandPerformImplEntry =
                     iCommandImplICommandPerformImplEntryOptional.orElseThrow(() -> new CommandNotFoundException("Kommandoen findes ikke!"));
 
-            final ICommandPerformImpl iCommandPerformImpl = iCommandImplICommandPerformImplEntry.getValue();
+            final AbstractCommandPerformImpl abstractCommandPerformImpl = iCommandImplICommandPerformImplEntry.getValue();
             final ICommandImpl iCommandImpl = iCommandImplICommandPerformImplEntry.getKey();
 
             if (!this.base.cooldownManager.hasCooldownExpired(player, iCommandImpl)) throw new CommandCooldownException(String.format("Du skal vente %s sek med at bruge kommandoen igen!", this.base.cooldownManager.getCooldown(player, iCommandImpl)));
-            iCommandPerformImpl.performPreArguments(player, args);
+            abstractCommandPerformImpl.performPreArguments(player, args);
             this.base.cooldownManager.addCooldown(player, iCommandImpl);
         }catch(CommandNotFoundException | CommandCooldownException e){
             player.sendMessage(e.getMessage());
         }
-
-
-
-
-
         return false;
     }
 
     public void registerCommands(){
-        Reflections reflections = new Reflections("dk.simonsejse.testplugin", Scanners.TypesAnnotated);
+        Reflections reflections = new Reflections("dk.simonsejse.automatecommands", Scanners.TypesAnnotated);
 
         final Set<Class<?>> commands = reflections.getTypesAnnotatedWith(ICommandImpl.class);
 
         for(Class<?> command : commands){
             try {
-                ICommandPerformImpl iCommandPerformImplInstance = (ICommandPerformImpl) command.getConstructor().newInstance();
-                final ICommandImpl iCommandImpl = iCommandPerformImplInstance.getClass().getAnnotation(ICommandImpl.class);
+                AbstractCommandPerformImpl abstractCommandPerformImplInstance = (AbstractCommandPerformImpl) command.getConstructor().newInstance();
+                final ICommandImpl iCommandImpl = abstractCommandPerformImplInstance.getClass().getAnnotation(ICommandImpl.class);
 
-                this.commands.put(iCommandImpl, iCommandPerformImplInstance);
+                this.commands.put(iCommandImpl, abstractCommandPerformImplInstance);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }

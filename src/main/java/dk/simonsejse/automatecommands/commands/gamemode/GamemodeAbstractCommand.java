@@ -1,15 +1,10 @@
 package dk.simonsejse.automatecommands.commands.gamemode;
 
 import dk.simonsejse.automatecommands.commands.ICommandImpl;
-import dk.simonsejse.automatecommands.commands.ICommandPerformImpl;
-import dk.simonsejse.automatecommands.commands.ISubCommand;
+import dk.simonsejse.automatecommands.commands.AbstractCommandPerformImpl;
 import dk.simonsejse.automatecommands.exceptions.WrongCommandUsage;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.List;
 
 @ICommandImpl(
         cmdName = "gamemode",
@@ -18,17 +13,7 @@ import java.util.List;
         info = "Kommandoen bruges til at skifte gamemode",
         cooldown = 5
 )
-public class GamemodeCommand implements ICommandPerformImpl {
-
-
-    @Nullable
-    @Override
-    public List<ISubCommand> subcommands() {
-        return Arrays.asList(
-                new CreativeArgument(),
-                new SurvivalArgument()
-        );
-    }
+public class GamemodeAbstractCommand extends AbstractCommandPerformImpl {
 
     @Override
     public void performPostExecutionWhenArgumentsNotFound(Player player, String[] args) throws WrongCommandUsage {
